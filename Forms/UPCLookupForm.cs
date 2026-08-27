@@ -11,22 +11,34 @@ using System.Net.Http;
 using ComicCollection.Data;
 using ComicCollection.Helpers;
 using ComicCollection.Styles;
+using Microsoft.Web.WebView2.WinForms;
 
 namespace ComicCollection.Forms
 {
     public partial class UPCLookupForm : Form
     {
+
+        private string? _gcdCoverURL;
         private readonly ComicLookupService _lookupService;
+        private readonly WebView2 _coverWebView;
+        private readonly CoverService _coverService;
         public UPCLookupForm()
         {
             InitializeComponent();
+
+            _lookupService = new ComicLookupService();
+            _coverWebView = new WebView2();
+
+            _coverWebView.Visible = false;
+
+            Controls.Add(_coverWebView);
+
+            _coverService = new CoverService(_coverWebView);
 
             ApplyTheme();
 
             // start with comic info fields disabled
             SetComicFieldsEnabled(false);
-
-            _lookupService = new ComicLookupService();
 
             // enter adds comic
             this.AcceptButton = AddComicUPCButton;
@@ -43,6 +55,8 @@ namespace ComicCollection.Forms
             IssueTextBox.Clear();
             PublisherTextBox.Clear();
             ReleaseYearTextBox.Clear();
+
+            _gcdCoverURL = null;
 
             // disable editing fields when results are reset
             SetComicFieldsEnabled(false);
@@ -85,6 +99,7 @@ namespace ComicCollection.Forms
                 IssueTextBox.Text = comic.IssueNumber;
                 PublisherTextBox.Text = comic.Publisher;
                 ReleaseYearTextBox.Text = comic.ReleaseYear?.ToString() ?? "";
+                _gcdCoverURL = comic.CoverPath;
 
                 // enable fields for editing
                 SetComicFieldsEnabled(true);
@@ -127,21 +142,21 @@ namespace ComicCollection.Forms
             UPCTextBox.Focus();
         }
 
-        private void AddComicUPCButton_Click(object sender, EventArgs e)
+        private async void AddComicUPCButton_Click(object sender, EventArgs e)
         {
             // Make sure required fields have been entered
-            if (string.IsNullOrEmpty(TitleTextBox.Text))
+            if (string.IsNullOrWhiteSpace(TitleTextBox.Text))
             {
                 StatusLabel.Text = "Please search for a comic before adding it";
                 return;
             }
 
-            if (string.IsNullOrEmpty(IssueTextBox.Text))
+            if (string.IsNullOrWhiteSpace(IssueTextBox.Text))
             {
                 StatusLabel.Text = "Please enter an issue number";
                 return;
             }
-            if (string.IsNullOrEmpty(PublisherTextBox.Text))
+            if (string.IsNullOrWhiteSpace(PublisherTextBox.Text))
             {
                 StatusLabel.Text = "Please enter a publisher";
                 return;
@@ -160,6 +175,8 @@ namespace ComicCollection.Forms
                     ReleaseYearTextBox.Focus();
                     return;
                 }
+
+                releaseYear = parsedYear;
             }
 
             // Create comic object
@@ -168,24 +185,55 @@ namespace ComicCollection.Forms
                 Title = TitleTextBox.Text,
                 IssueNumber = IssueTextBox.Text,
                 Publisher = PublisherTextBox.Text,
-                ReleaseYear = int.TryParse(
-                    ReleaseYearTextBox.Text.Trim(),
-                    out int year
-                ) ? year : null,
-
+                ReleaseYear = releaseYear,
                 UPC = string.IsNullOrWhiteSpace(UPCTextBox.Text)
                     ? null
-                    : UPCTextBox.Text.Trim()
+                    : UPCTextBox.Text.Trim(),
             };
 
             try
             {
+                AddComicUPCButton.Enabled = false;
+                StatusLabel.Text = "Adding comic...";
+
                 Database database = new Database();
 
-                database.AddComic(comic);
+                // Add comic and get it's new assigned local ID
+                int comicId = database.AddComic(comic);
 
-                // Tell user what was added
-                StatusLabel.Text = $"{comic.Title} #{comic.IssueNumber} has been successfully added.";
+                bool coverSaved = false;
+
+                // Try to download GCD cover if one is available
+                if (!string.IsNullOrWhiteSpace(_gcdCoverURL))
+                {
+                    try
+                    {
+                        string coverPath =
+                            await _coverService.DownloadCoverAsync(
+                                _gcdCoverURL,
+                                comicId
+                            );
+
+                        database.UpdateCoverPath(
+                            comicId,
+                            coverPath
+                        );
+
+                        coverSaved = true;
+                    }
+                    catch { 
+                            // comic already saved, cover failure is no big deal
+                    }
+                }
+
+                if (coverSaved)
+                {
+                    StatusLabel.Text = $"{comic.Title} #{comic.IssueNumber} has been successfully added.";
+                }
+                else
+                {
+                    StatusLabel.Text = $"{comic.Title} #{comic.IssueNumber} has been successfully added, but no cover was available.";
+                }
 
                 // Clear comic information so user can add new comic
                 ClearComicFields();
@@ -194,9 +242,14 @@ namespace ComicCollection.Forms
                 UPCTextBox.Clear();
                 UPCTextBox.Focus();
             }
+            // error handling
             catch (Exception)
             {
-                StatusLabel.Text = "An error occured while adding the comic";
+                StatusLabel.Text = "An error occured while adding the comic.";
+            }
+            finally
+            {
+                AddComicUPCButton.Enabled = false;
             }
         }
 
@@ -250,5 +303,36 @@ namespace ComicCollection.Forms
             StyleTextBoxes();
         }
 
+
+        // TEST BUTTON
+        private async void TestCoverButton_Click(object sender, EventArgs e)
+        {
+            string coverUrl =
+                "https://files1.comics.org//img/gcd/covers_by_id/1835/w400/1835446.jpg";
+
+            try
+            {
+                StatusLabel.Text = "Downloading cover...";
+
+                string coverPath =
+                    await _coverService.DownloadCoverAsync(
+                        coverUrl,
+                        999999
+                    );
+
+                StatusLabel.Text =
+                    $"Cover saved successfully: {coverPath}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.ToString(),
+                    "Cover Download Error"
+                );
+
+                StatusLabel.Text =
+                    "Unable to download cover.";
+            }
+        }
     }
 }

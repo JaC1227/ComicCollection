@@ -24,7 +24,8 @@ namespace ComicCollection.Data
                     IssueNumber TEXT NOT NULL,
                     Publisher TEXT NOT NULL,
                     ReleaseYear INTEGER,
-                    UPC TEXT
+                    UPC TEXT,
+                    CoverPath TEXT
                 );
             ";
 
@@ -34,7 +35,7 @@ namespace ComicCollection.Data
         }
 
         // method to add comic to database
-        public void AddComic(Comic comic)
+        public int AddComic(Comic comic)
         {
             using var connection = new SqliteConnection(ConnectionString);
 
@@ -57,6 +58,16 @@ namespace ComicCollection.Data
                 (object?)comic.UPC ?? DBNull.Value);
 
             command.ExecuteNonQuery();
+
+            // Get ID SQLite assigned to added comic
+            using var idCommand = new SqliteCommand(
+                "SELECT last_insert_rowid();",
+                connection
+                );
+
+            long id = (long)idCommand.ExecuteScalar()!;
+
+            return (int)id;
         }
 
         // method to delete comics from database
@@ -90,7 +101,7 @@ namespace ComicCollection.Data
             connection.Open();
 
             string sql = @"
-                SELECT Id, Title, IssueNumber, Publisher, ReleaseYear, UPC
+                SELECT Id, Title, IssueNumber, Publisher, ReleaseYear, UPC, CoverPath
                 FROM Comics
                 WHERE Title LIKE $search
                     OR IssueNumber LIKE $search
@@ -114,13 +125,76 @@ namespace ComicCollection.Data
                     IssueNumber = reader.GetString(2),
                     Publisher = reader.GetString(3),
                     ReleaseYear = reader.IsDBNull(4) ? null : reader.GetInt32(4),
-                    UPC = reader.IsDBNull(5) ? null : reader.GetString(5)
+                    UPC = reader.IsDBNull(5) ? null : reader.GetString(5),
+                    CoverPath = reader.IsDBNull(6) ? null : reader.GetString(6)
                 };
 
                 comics.Add(comic);
             }
 
             return comics;
+        }
+
+        // Update cover path for existing comic
+        public void UpdateCoverPath(int comicId, string coverPath)
+        {
+            using var connection = new SqliteConnection(ConnectionString);
+
+            connection.Open();
+
+            string sql = @"
+                UPDATE Comics
+                SET CoverPath = $coverPath
+                WHERE Id = $id;
+            ";
+
+            using var command = new SqliteCommand(sql, connection);
+
+            command.Parameters.AddWithValue("$coverPath", coverPath);
+            command.Parameters.AddWithValue("$id", comicId);
+
+            command.ExecuteNonQuery();
+        }
+
+        public Comic? GetComic(int id)
+        {
+            using var connection = new SqliteConnection(ConnectionString);
+
+            connection.Open();
+
+            string sql = @"
+                SELECT Id, Title, IssueNumber, Publisher, ReleaseYear, UPC, CoverPath
+                FROM Comics
+                WHERE Id = $id;
+            ";
+
+            using var command = new SqliteCommand(sql, connection);
+
+            command.Parameters.AddWithValue("$id", id);
+
+            using var reader = command.ExecuteReader();
+
+            if (!reader.Read())
+            {
+                return null;
+            }
+
+            return new Comic
+            {
+                Id = reader.GetInt32(0),
+                Title = reader.GetString(1),
+                IssueNumber = reader.GetString(2),
+                Publisher = reader.GetString(3),
+                ReleaseYear = reader.IsDBNull(4)
+                    ? null
+                    : reader.GetInt32(4),
+                UPC = reader.IsDBNull(5)
+                    ? null
+                    : reader.GetString(5),
+                CoverPath = reader.IsDBNull(6)
+                    ? null
+                    : reader.GetString(6)
+            };
         }
     }
 }

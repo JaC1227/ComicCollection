@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             ComicDataGridView = new DataGridView();
             IdColumn = new DataGridViewTextBoxColumn();
+            CoverColumn = new DataGridViewImageColumn();
             TitleColumn = new DataGridViewTextBoxColumn();
             IssueColumn = new DataGridViewTextBoxColumn();
             PublisherColumn = new DataGridViewTextBoxColumn();
@@ -41,9 +42,10 @@
             DeleteComicButton = new Button();
             SearchButton = new Button();
             ClearSearchButton = new Button();
-            TestGCDButton = new Button();
             AddComicUPC = new Button();
+            ComicCoverPictureBox = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)ComicDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ComicCoverPictureBox).BeginInit();
             SuspendLayout();
             // 
             // ComicDataGridView
@@ -61,16 +63,18 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             ComicDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             ComicDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ComicDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdColumn, TitleColumn, IssueColumn, PublisherColumn, YearColumn });
-            ComicDataGridView.Location = new Point(31, 133);
+            ComicDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdColumn, CoverColumn, TitleColumn, IssueColumn, PublisherColumn, YearColumn });
+            ComicDataGridView.Location = new Point(239, 134);
             ComicDataGridView.Margin = new Padding(4, 3, 4, 3);
             ComicDataGridView.MultiSelect = false;
             ComicDataGridView.Name = "ComicDataGridView";
             ComicDataGridView.ReadOnly = true;
             ComicDataGridView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             ComicDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ComicDataGridView.Size = new Size(521, 349);
+            ComicDataGridView.Size = new Size(566, 373);
             ComicDataGridView.TabIndex = 0;
+            ComicDataGridView.CellDoubleClick += ComicDataGridView_CellDoubleClick;
+            ComicDataGridView.SelectionChanged += ComicDataGridView_SelectionChanged;
             // 
             // IdColumn
             // 
@@ -79,11 +83,21 @@
             IdColumn.ReadOnly = true;
             IdColumn.Visible = false;
             // 
+            // CoverColumn
+            // 
+            CoverColumn.FillWeight = 50F;
+            CoverColumn.HeaderText = "COVER        ";
+            CoverColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            CoverColumn.MinimumWidth = 50;
+            CoverColumn.Name = "CoverColumn";
+            CoverColumn.ReadOnly = true;
+            CoverColumn.Width = 72;
+            // 
             // TitleColumn
             // 
             TitleColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             TitleColumn.HeaderText = "    TITLE";
-            TitleColumn.MinimumWidth = 100;
+            TitleColumn.MinimumWidth = 130;
             TitleColumn.Name = "TitleColumn";
             TitleColumn.ReadOnly = true;
             // 
@@ -111,8 +125,7 @@
             // 
             // AddComicButton
             // 
-            AddComicButton.Anchor = AnchorStyles.Top;
-            AddComicButton.Location = new Point(168, 40);
+            AddComicButton.Location = new Point(45, 12);
             AddComicButton.Margin = new Padding(4, 3, 4, 3);
             AddComicButton.Name = "AddComicButton";
             AddComicButton.Size = new Size(122, 26);
@@ -124,17 +137,17 @@
             // SearchTextBox
             // 
             SearchTextBox.Anchor = AnchorStyles.Top;
-            SearchTextBox.Location = new Point(31, 104);
+            SearchTextBox.Location = new Point(300, 75);
             SearchTextBox.Margin = new Padding(4, 3, 4, 3);
             SearchTextBox.Name = "SearchTextBox";
-            SearchTextBox.Size = new Size(274, 22);
+            SearchTextBox.Size = new Size(431, 22);
             SearchTextBox.TabIndex = 2;
             // 
             // ComicCountLabel
             // 
             ComicCountLabel.Anchor = AnchorStyles.Bottom;
             ComicCountLabel.AutoSize = true;
-            ComicCountLabel.Location = new Point(248, 485);
+            ComicCountLabel.Location = new Point(469, 510);
             ComicCountLabel.Margin = new Padding(4, 0, 4, 0);
             ComicCountLabel.Name = "ComicCountLabel";
             ComicCountLabel.Size = new Size(93, 17);
@@ -143,8 +156,7 @@
             // 
             // DeleteComicButton
             // 
-            DeleteComicButton.Anchor = AnchorStyles.Top;
-            DeleteComicButton.Location = new Point(313, 72);
+            DeleteComicButton.Location = new Point(45, 103);
             DeleteComicButton.Margin = new Padding(4, 3, 4, 3);
             DeleteComicButton.Name = "DeleteComicButton";
             DeleteComicButton.Size = new Size(122, 26);
@@ -156,10 +168,10 @@
             // SearchButton
             // 
             SearchButton.Anchor = AnchorStyles.Top;
-            SearchButton.Location = new Point(313, 104);
+            SearchButton.Location = new Point(300, 103);
             SearchButton.Margin = new Padding(4, 3, 4, 3);
             SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(140, 24);
+            SearchButton.Size = new Size(309, 24);
             SearchButton.TabIndex = 6;
             SearchButton.Text = "Search";
             SearchButton.UseVisualStyleBackColor = true;
@@ -168,29 +180,18 @@
             // ClearSearchButton
             // 
             ClearSearchButton.Anchor = AnchorStyles.Top;
-            ClearSearchButton.Location = new Point(461, 104);
+            ClearSearchButton.Location = new Point(627, 103);
             ClearSearchButton.Margin = new Padding(4, 3, 4, 3);
             ClearSearchButton.Name = "ClearSearchButton";
-            ClearSearchButton.Size = new Size(91, 24);
+            ClearSearchButton.Size = new Size(104, 24);
             ClearSearchButton.TabIndex = 7;
             ClearSearchButton.Text = "Clear";
             ClearSearchButton.UseVisualStyleBackColor = true;
             ClearSearchButton.Click += ClearSearchButton_Click;
             // 
-            // TestGCDButton
-            // 
-            TestGCDButton.Location = new Point(12, 12);
-            TestGCDButton.Name = "TestGCDButton";
-            TestGCDButton.Size = new Size(75, 23);
-            TestGCDButton.TabIndex = 8;
-            TestGCDButton.Text = "Test GCD";
-            TestGCDButton.UseVisualStyleBackColor = true;
-            TestGCDButton.Click += TestGCDButton_Click;
-            // 
             // AddComicUPC
             // 
-            AddComicUPC.Anchor = AnchorStyles.Top;
-            AddComicUPC.Location = new Point(168, 72);
+            AddComicUPC.Location = new Point(45, 44);
             AddComicUPC.Margin = new Padding(4, 3, 4, 3);
             AddComicUPC.Name = "AddComicUPC";
             AddComicUPC.Size = new Size(122, 26);
@@ -199,13 +200,22 @@
             AddComicUPC.UseVisualStyleBackColor = true;
             AddComicUPC.Click += AddComicUPC_Click;
             // 
+            // ComicCoverPictureBox
+            // 
+            ComicCoverPictureBox.Location = new Point(12, 152);
+            ComicCoverPictureBox.Name = "ComicCoverPictureBox";
+            ComicCoverPictureBox.Size = new Size(220, 355);
+            ComicCoverPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            ComicCoverPictureBox.TabIndex = 10;
+            ComicCoverPictureBox.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(584, 511);
+            ClientSize = new Size(837, 536);
+            Controls.Add(ComicCoverPictureBox);
             Controls.Add(AddComicUPC);
-            Controls.Add(TestGCDButton);
             Controls.Add(ClearSearchButton);
             Controls.Add(SearchButton);
             Controls.Add(DeleteComicButton);
@@ -215,11 +225,12 @@
             Controls.Add(ComicDataGridView);
             Font = new Font("Franklin Gothic Medium", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 3, 4, 3);
-            MinimumSize = new Size(600, 550);
+            MinimumSize = new Size(853, 575);
             Name = "Form1";
             Text = "Comic Collection";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)ComicDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ComicCoverPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -233,12 +244,13 @@
         private Button DeleteComicButton;
         private Button SearchButton;
         private Button ClearSearchButton;
+        private Button AddComicUPC;
+        private PictureBox ComicCoverPictureBox;
         private DataGridViewTextBoxColumn IdColumn;
+        private DataGridViewImageColumn CoverColumn;
         private DataGridViewTextBoxColumn TitleColumn;
         private DataGridViewTextBoxColumn IssueColumn;
         private DataGridViewTextBoxColumn PublisherColumn;
         private DataGridViewTextBoxColumn YearColumn;
-        private Button TestGCDButton;
-        private Button AddComicUPC;
     }
 }
