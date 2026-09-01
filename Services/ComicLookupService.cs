@@ -84,6 +84,7 @@ namespace ComicCollection.Services
             JsonElement root = document.RootElement;
 
             string seriesName = root.GetProperty("series_name").GetString() ?? "";
+            string titleName = root.GetProperty("title").GetString() ?? "";
             string issueNumber = root.GetProperty("number").GetString() ?? "";
             string barcode = root.GetProperty("barcode").GetString() ?? "";
             string publisher = root.GetProperty("indicia_publisher").GetString() ?? "";
@@ -106,9 +107,21 @@ namespace ComicCollection.Services
                 coverPath = coverElement.GetString();
             }
 
+            // full title
+            string fullTitle = "";
+
+            if (titleName != "")
+            {
+                fullTitle = seriesName + " | " + titleName;
+            }
+            else
+            {
+                fullTitle = seriesName;
+            }
+
             Comic comic = new Comic
             {
-                Title = seriesName,
+                Title = fullTitle,
                 IssueNumber = issueNumber,
                 Publisher = publisher,
                 ReleaseYear = releaseYear,
@@ -117,6 +130,26 @@ namespace ComicCollection.Services
             }
             ;
             return comic;
+        }
+
+        // Find all comics matching a upc
+        public async Task<List<Comic>> GetComicsByUPCAsync(string upc)
+        {
+            List<int> issueIds = FindGCDIssueIds(upc);
+
+            List<Comic> comics = new List<Comic>();
+
+            foreach (int issueId in issueIds)
+            {
+                Comic? comic = await GetGCDIssueAsync(issueId);
+
+                if (comic != null)
+                {
+                    comics.Add(comic);
+                }
+            }
+
+            return comics;
         }
 
         // Find Comic using UPC
@@ -136,8 +169,10 @@ namespace ComicCollection.Services
                 throw new InvalidOperationException(
                     $"The UPC returned {issueIds.Count} comics. " + "This UPC cannot be automatically identified.");
             }
+
             // Retrieve comic information from GCD
             return await GetGCDIssueAsync(issueIds[0]);
         }
+
     }
 }

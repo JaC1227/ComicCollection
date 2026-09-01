@@ -43,14 +43,13 @@
             ReleaseYearTextBox = new TextBox();
             StatusLabel = new Label();
             ClearUPCButton = new Button();
-            TestCoverButton = new Button();
             SuspendLayout();
             // 
             // UPCLabel
             // 
             UPCLabel.Anchor = AnchorStyles.Top;
             UPCLabel.AutoSize = true;
-            UPCLabel.Location = new Point(157, 21);
+            UPCLabel.Location = new Point(135, 21);
             UPCLabel.Name = "UPCLabel";
             UPCLabel.Size = new Size(109, 15);
             UPCLabel.TabIndex = 0;
@@ -59,7 +58,7 @@
             // UPCTextBox
             // 
             UPCTextBox.Anchor = AnchorStyles.Top;
-            UPCTextBox.Location = new Point(126, 39);
+            UPCTextBox.Location = new Point(104, 39);
             UPCTextBox.Name = "UPCTextBox";
             UPCTextBox.Size = new Size(183, 23);
             UPCTextBox.TabIndex = 1;
@@ -67,7 +66,7 @@
             // SearchUPCButton
             // 
             SearchUPCButton.Anchor = AnchorStyles.Top;
-            SearchUPCButton.Location = new Point(155, 68);
+            SearchUPCButton.Location = new Point(133, 68);
             SearchUPCButton.Name = "SearchUPCButton";
             SearchUPCButton.Size = new Size(111, 23);
             SearchUPCButton.TabIndex = 2;
@@ -78,7 +77,7 @@
             // CancelUPCButton
             // 
             CancelUPCButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            CancelUPCButton.Location = new Point(369, 380);
+            CancelUPCButton.Location = new Point(325, 235);
             CancelUPCButton.Name = "CancelUPCButton";
             CancelUPCButton.Size = new Size(47, 23);
             CancelUPCButton.TabIndex = 3;
@@ -89,9 +88,9 @@
             // AddComicUPCButton
             // 
             AddComicUPCButton.Anchor = AnchorStyles.Bottom;
-            AddComicUPCButton.Location = new Point(164, 380);
+            AddComicUPCButton.Location = new Point(98, 235);
             AddComicUPCButton.Name = "AddComicUPCButton";
-            AddComicUPCButton.Size = new Size(102, 23);
+            AddComicUPCButton.Size = new Size(205, 23);
             AddComicUPCButton.TabIndex = 4;
             AddComicUPCButton.Text = "Add Comic";
             AddComicUPCButton.UseVisualStyleBackColor = true;
@@ -101,7 +100,7 @@
             // 
             TitleLabel.Anchor = AnchorStyles.Top;
             TitleLabel.AutoSize = true;
-            TitleLabel.Location = new Point(120, 107);
+            TitleLabel.Location = new Point(88, 107);
             TitleLabel.Name = "TitleLabel";
             TitleLabel.Size = new Size(33, 15);
             TitleLabel.TabIndex = 5;
@@ -111,7 +110,7 @@
             // 
             IssueLabel.Anchor = AnchorStyles.Top;
             IssueLabel.AutoSize = true;
-            IssueLabel.Location = new Point(120, 137);
+            IssueLabel.Location = new Point(88, 136);
             IssueLabel.Name = "IssueLabel";
             IssueLabel.Size = new Size(36, 15);
             IssueLabel.TabIndex = 6;
@@ -121,7 +120,7 @@
             // 
             label3.Anchor = AnchorStyles.Top;
             label3.AutoSize = true;
-            label3.Location = new Point(99, 168);
+            label3.Location = new Point(65, 168);
             label3.Name = "label3";
             label3.Size = new Size(59, 15);
             label3.TabIndex = 7;
@@ -131,7 +130,7 @@
             // 
             ReleaseYearLabel.Anchor = AnchorStyles.Top;
             ReleaseYearLabel.AutoSize = true;
-            ReleaseYearLabel.Location = new Point(126, 198);
+            ReleaseYearLabel.Location = new Point(92, 198);
             ReleaseYearLabel.Name = "ReleaseYearLabel";
             ReleaseYearLabel.Size = new Size(32, 15);
             ReleaseYearLabel.TabIndex = 8;
@@ -140,48 +139,48 @@
             // TitleTextBox
             // 
             TitleTextBox.Anchor = AnchorStyles.Top;
-            TitleTextBox.Location = new Point(164, 104);
+            TitleTextBox.Location = new Point(133, 104);
             TitleTextBox.Name = "TitleTextBox";
-            TitleTextBox.Size = new Size(155, 23);
+            TitleTextBox.Size = new Size(210, 23);
             TitleTextBox.TabIndex = 9;
             // 
             // IssueTextBox
             // 
             IssueTextBox.Anchor = AnchorStyles.Top;
-            IssueTextBox.Location = new Point(164, 133);
+            IssueTextBox.Location = new Point(133, 133);
             IssueTextBox.Name = "IssueTextBox";
-            IssueTextBox.Size = new Size(155, 23);
+            IssueTextBox.Size = new Size(164, 23);
             IssueTextBox.TabIndex = 10;
             // 
             // PublisherTextBox
             // 
             PublisherTextBox.Anchor = AnchorStyles.Top;
-            PublisherTextBox.Location = new Point(164, 165);
+            PublisherTextBox.Location = new Point(135, 165);
             PublisherTextBox.Name = "PublisherTextBox";
-            PublisherTextBox.Size = new Size(155, 23);
+            PublisherTextBox.Size = new Size(162, 23);
             PublisherTextBox.TabIndex = 11;
             // 
             // ReleaseYearTextBox
             // 
             ReleaseYearTextBox.Anchor = AnchorStyles.Top;
-            ReleaseYearTextBox.Location = new Point(164, 195);
+            ReleaseYearTextBox.Location = new Point(135, 195);
             ReleaseYearTextBox.Name = "ReleaseYearTextBox";
-            ReleaseYearTextBox.Size = new Size(155, 23);
+            ReleaseYearTextBox.Size = new Size(162, 23);
             ReleaseYearTextBox.TabIndex = 12;
             // 
             // StatusLabel
             // 
             StatusLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            StatusLabel.Location = new Point(2, 410);
+            StatusLabel.Location = new Point(53, 289);
             StatusLabel.Name = "StatusLabel";
-            StatusLabel.Size = new Size(423, 22);
+            StatusLabel.Size = new Size(290, 43);
             StatusLabel.TabIndex = 13;
             StatusLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ClearUPCButton
             // 
             ClearUPCButton.Anchor = AnchorStyles.Top;
-            ClearUPCButton.Location = new Point(272, 68);
+            ClearUPCButton.Location = new Point(250, 68);
             ClearUPCButton.Name = "ClearUPCButton";
             ClearUPCButton.Size = new Size(47, 23);
             ClearUPCButton.TabIndex = 14;
@@ -189,22 +188,11 @@
             ClearUPCButton.UseVisualStyleBackColor = true;
             ClearUPCButton.Click += ClearUPCButton_Click;
             // 
-            // TestCoverButton
-            // 
-            TestCoverButton.Location = new Point(155, 271);
-            TestCoverButton.Name = "TestCoverButton";
-            TestCoverButton.Size = new Size(150, 23);
-            TestCoverButton.TabIndex = 15;
-            TestCoverButton.Text = "Test Cover Browser";
-            TestCoverButton.UseVisualStyleBackColor = true;
-            TestCoverButton.Click += TestCoverButton_Click;
-            // 
             // UPCLookupForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(428, 431);
-            Controls.Add(TestCoverButton);
+            ClientSize = new Size(384, 341);
             Controls.Add(ClearUPCButton);
             Controls.Add(StatusLabel);
             Controls.Add(ReleaseYearTextBox);
@@ -244,6 +232,5 @@
         private TextBox ReleaseYearTextBox;
         private Label StatusLabel;
         private Button ClearUPCButton;
-        private Button TestCoverButton;
     }
 }

@@ -145,7 +145,7 @@ namespace ComicCollection
             // clear current cover
             ComicCoverPictureBox.Image = null;
 
-            if(ComicDataGridView.CurrentRow==null)
+            if (ComicDataGridView.CurrentRow == null)
             {
                 return;
             }
@@ -163,7 +163,7 @@ namespace ComicCollection
 
             Comic? comic = database.GetComic(comicId);
 
-            if(comic == null)
+            if (comic == null)
             {
                 return;
             }
@@ -352,6 +352,15 @@ namespace ComicCollection
             UPCLookupForm lookupForm = new UPCLookupForm();
 
             lookupForm.ShowDialog();
+
+            LoadComics();
+        }
+
+        private void BarcodeScannerButton_Click(object sender, EventArgs e)
+        {
+            using BarcodeScannerForm form = new BarcodeScannerForm();
+
+            form.ShowDialog();
 
             LoadComics();
         }

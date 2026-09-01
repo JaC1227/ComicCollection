@@ -85,20 +85,51 @@ namespace ComicCollection.Forms
                 SearchUPCButton.Enabled = false;
                 StatusLabel.Text = "Searching...";
 
-                Comic? comic = await _lookupService.GetComicByUPCAsync(normalizedUPC);
+                List<Comic> comics = await _lookupService.GetComicsByUPCAsync(normalizedUPC);
 
                 // if nothing is found
-                if (comic == null)
+                if (comics.Count == 0)
                 {
                     StatusLabel.Text = "No comic was found with that UPC";
                     ClearComicFields();
                     return;
                 }
 
+                Comic? comic;
+
+                // only one comic found
+                if (comics.Count == 1)
+                {
+                    comic = comics[0];
+                }
+                else
+                {
+                    // multiple comics found
+                    using ComicSelectionForm selectionForm = new ComicSelectionForm(comics);
+
+                    if (selectionForm.ShowDialog() != DialogResult.OK)
+                    {
+                        StatusLabel.Text = "Comic selection cancelled";
+                        return;
+                    }
+
+                    comic = selectionForm.SelectedComic;
+                }
+
+                // No comic was selected
+                if (comic == null)
+                {
+                    StatusLabel.Text = "No comic was selected.";
+                    ClearComicFields();
+                    return;
+                }
+
+                // display comic info
                 TitleTextBox.Text = comic.Title;
                 IssueTextBox.Text = comic.IssueNumber;
                 PublisherTextBox.Text = comic.Publisher;
                 ReleaseYearTextBox.Text = comic.ReleaseYear?.ToString() ?? "";
+                // store cover url
                 _gcdCoverURL = comic.CoverPath;
 
                 // enable fields for editing
@@ -107,12 +138,6 @@ namespace ComicCollection.Forms
                 StatusLabel.Text = "Comic found. You can edit the information before adding it.";
             }
             // error handling
-            catch (InvalidOperationException)
-            {
-                ClearComicFields();
-
-                StatusLabel.Text = "This UPC matches multiple comics and cannot be automatically added.";
-            }
             catch (HttpRequestException)
             {
                 ClearComicFields();
