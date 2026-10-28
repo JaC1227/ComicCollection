@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="ComicCollection.csproj" />
+  <Project Path="ComicCollection.csproj">
+    <BuildType Project="Release" />
+  </Project>
 </Solution>
