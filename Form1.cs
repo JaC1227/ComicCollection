@@ -356,13 +356,5 @@ namespace ComicCollection
             LoadComics();
         }
 
-        private void BarcodeScannerButton_Click(object sender, EventArgs e)
-        {
-            using BarcodeScannerForm form = new BarcodeScannerForm();
-
-            form.ShowDialog();
-
-            LoadComics();
-        }
     }
 }

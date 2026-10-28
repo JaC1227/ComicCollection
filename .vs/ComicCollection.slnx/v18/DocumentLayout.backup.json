@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F88AE450-BAED-34BA-785F-874CEEE1FC00}|ComicCollection.csproj|c:\\users\\spikey\\documents\\github\\comiccollection\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{F88AE450-BAED-34BA-785F-874CEEE1FC00}|ComicCollection.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F88AE450-BAED-34BA-785F-874CEEE1FC00}|ComicCollection.csproj|c:\\users\\spikey\\documents\\github\\comiccollection\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F88AE450-BAED-34BA-785F-874CEEE1FC00}|ComicCollection.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F88AE450-BAED-34BA-785F-874CEEE1FC00}|ComicCollection.csproj|c:\\users\\spikey\\documents\\github\\comiccollection\\addcomicform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F88AE450-BAED-34BA-785F-874CEEE1FC00}|ComicCollection.csproj|solutionrelative:addcomicform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F88AE450-BAED-34BA-785F-874CEEE1FC00}|ComicCollection.csproj|c:\\users\\spikey\\documents\\github\\comiccollection\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F88AE450-BAED-34BA-785F-874CEEE1FC00}|ComicCollection.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F88AE450-BAED-34BA-785F-874CEEE1FC00}|ComicCollection.csproj|c:\\users\\spikey\\documents\\github\\comiccollection\\forms\\upclookupform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,11 +38,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "AddComicForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\AddComicForm.Designer.cs",
+              "RelativeDocumentMoniker": "AddComicForm.Designer.cs",
+              "ToolTip": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\AddComicForm.Designer.cs",
+              "RelativeToolTip": "AddComicForm.Designer.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAA3wKoAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-28T18:46:58.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Database.cs",
               "DocumentMoniker": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\Data\\Database.cs",
               "RelativeDocumentMoniker": "Data\\Database.cs",
@@ -46,12 +63,11 @@
               "RelativeToolTip": "Data\\Database.cs",
               "ViewState": "AgIAAJoAAAAAAAAAAAAswKUAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-27T02:45:27.471Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-27T02:45:27.471Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
@@ -63,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "UPCLookupForm.cs",
               "DocumentMoniker": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\Forms\\UPCLookupForm.cs",
               "RelativeDocumentMoniker": "Forms\\UPCLookupForm.cs",
@@ -76,20 +92,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAM0AAAAAAAAAAADgvxcBAAASAAAAAAAAAA==",
+              "ViewState": "AgIAADcAAAAAAAAAAAAUwFMAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-27T00:07:41.456Z",
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "CoverService.cs",
               "DocumentMoniker": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\Services\\CoverService.cs",
               "RelativeDocumentMoniker": "Services\\CoverService.cs",
@@ -101,7 +121,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "UPCLookupForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Spikey\\Documents\\GitHub\\ComicCollection\\Forms\\UPCLookupForm.cs",
               "RelativeDocumentMoniker": "Forms\\UPCLookupForm.cs",

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             ComicDataGridView = new DataGridView();
             IdColumn = new DataGridViewTextBoxColumn();
             CoverColumn = new DataGridViewImageColumn();
@@ -44,7 +44,6 @@
             ClearSearchButton = new Button();
             AddComicUPC = new Button();
             ComicCoverPictureBox = new PictureBox();
-            BarcodeScannerButton = new Button();
             ((System.ComponentModel.ISupportInitialize)ComicDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ComicCoverPictureBox).BeginInit();
             SuspendLayout();
@@ -55,14 +54,14 @@
             ComicDataGridView.AllowUserToDeleteRows = false;
             ComicDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ComicDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = SystemColors.Control;
-            dataGridViewCellStyle5.Font = new Font("Franklin Gothic Medium", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            ComicDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Franklin Gothic Medium", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            ComicDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             ComicDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ComicDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdColumn, CoverColumn, TitleColumn, IssueColumn, PublisherColumn, YearColumn });
             ComicDataGridView.Location = new Point(239, 134);
@@ -126,7 +125,7 @@
             // 
             // AddComicButton
             // 
-            AddComicButton.Location = new Point(45, 12);
+            AddComicButton.Location = new Point(45, 30);
             AddComicButton.Margin = new Padding(4, 3, 4, 3);
             AddComicButton.Name = "AddComicButton";
             AddComicButton.Size = new Size(122, 26);
@@ -192,7 +191,7 @@
             // 
             // AddComicUPC
             // 
-            AddComicUPC.Location = new Point(45, 44);
+            AddComicUPC.Location = new Point(45, 62);
             AddComicUPC.Margin = new Padding(4, 3, 4, 3);
             AddComicUPC.Name = "AddComicUPC";
             AddComicUPC.Size = new Size(122, 26);
@@ -210,22 +209,11 @@
             ComicCoverPictureBox.TabIndex = 10;
             ComicCoverPictureBox.TabStop = false;
             // 
-            // BarcodeScannerButton
-            // 
-            BarcodeScannerButton.Location = new Point(45, 74);
-            BarcodeScannerButton.Name = "BarcodeScannerButton";
-            BarcodeScannerButton.Size = new Size(122, 23);
-            BarcodeScannerButton.TabIndex = 11;
-            BarcodeScannerButton.Text = "Barcode Scanner";
-            BarcodeScannerButton.UseVisualStyleBackColor = true;
-            BarcodeScannerButton.Click += BarcodeScannerButton_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(837, 536);
-            Controls.Add(BarcodeScannerButton);
             Controls.Add(ComicCoverPictureBox);
             Controls.Add(AddComicUPC);
             Controls.Add(ClearSearchButton);
@@ -264,6 +252,5 @@
         private DataGridViewTextBoxColumn IssueColumn;
         private DataGridViewTextBoxColumn PublisherColumn;
         private DataGridViewTextBoxColumn YearColumn;
-        private Button BarcodeScannerButton;
     }
 }
